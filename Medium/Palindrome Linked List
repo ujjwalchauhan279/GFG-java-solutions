@@ -1,0 +1,51 @@
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach: 
+1. Find middle using slow-fast pointer.
+2. Break list into two halves.
+3. Reverse second half.
+4. Compare both halves.
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+class Solution {
+    Node reverse(Node head) {
+        Node curr=head;
+        Node prev=null;
+        Node fwd=null;
+        while(curr!=null){
+            fwd=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=fwd;
+        }
+        return prev;
+    }
+    public boolean isPalindrome(Node head) {
+        Node slow = head;
+        Node fast = head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node newlist=slow.next;
+        slow.next=null;
+        newlist = reverse(newlist);
+        slow=head;
+        fast=newlist;
+        while(slow!=null && fast!=null){
+            if(slow.data!=fast.data) return false;
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return true;
+    }
+}
