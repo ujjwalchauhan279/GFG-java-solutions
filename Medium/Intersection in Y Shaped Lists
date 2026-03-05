@@ -1,0 +1,56 @@
+/* 
+
+Time Complexity: O(n+m)
+Space Complexity: O(1)
+Approach:
+1. Dono linked lists ki length find karo (l1, l2).
+2. Length difference nikaalo
+3. Jo list badi hai uske pointer ko diff steps aage move karo
+   Taaki dono pointers same remaining distance par aa jayein.
+4. Ab dono pointers ko ek saath move karo
+5. Jab i == j ho jaye → wahi intersection node hai.
+6. Us node ko return karo.
+
+*/
+
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+*/
+
+class Solution {
+    public int len(Node head){
+        Node temp=head;
+        int length=0;
+        while(temp!=null){
+            length++;
+            temp=temp.next;
+        }
+        return length;
+    }
+    public Node intersectPoint(Node head1, Node head2) {
+        Node i = head1;
+        Node j = head2;
+        int l1 = len(head1);
+        int l2 = len(head2);
+        
+        if(l1>l2){
+            for(int k=1; k<=l1-l2; k++) i=i.next;
+        }
+        else{
+            for(int k=1; k<=l2-l1; k++) j=j.next;
+        }
+        while(i!=j){
+            i=i.next;
+            j=j.next;
+        }
+        return i;
+    }
+}
