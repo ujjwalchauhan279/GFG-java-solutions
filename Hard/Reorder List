@@ -1,0 +1,59 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Divide list from middle
+2. reverse second part
+3. join nodes of divided part alternatively
+
+*/
+
+/*class Node
+{
+    int data;
+    Node next;
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}*/
+
+class Solution {
+    void reorderlist(Node head) {
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node mid=slow.next;
+        slow.next=null;
+        Node curr=mid;
+        Node prev=null;
+        Node fwd=null;
+        while(curr!=null){
+            fwd=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=fwd;
+        }
+        mid=prev;
+        slow=head;
+        Node dummy = new Node(-1);
+        Node temp = dummy;
+        while(slow!=null && mid!=null){
+            temp.next=slow;
+            temp=slow;
+            slow=slow.next;
+            
+            temp.next=mid;
+            temp=mid;
+            mid=mid.next;
+        }
+        if(slow!=null) temp.next=slow;
+        else temp.next=mid;
+        
+        head=dummy.next;
+    }
+}
