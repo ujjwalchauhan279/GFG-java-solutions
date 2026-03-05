@@ -1,0 +1,29 @@
+/* 
+
+Time Complexity: O(1)
+Space Complexity: O(1)
+Approach:
+1. copy val of next of del_node to del_node.
+2. skip one inbetween node.
+
+*/
+
+/*
+class Node
+{
+    int data ;
+    Node next;
+    Node(int d)
+    {
+        data = d;
+        next = null;
+    }
+}
+*/
+
+class Solution {
+    public void deleteNode(Node del_node) {
+        del_node.data = del_node.next.data;
+        del_node.next=del_node.next.next;
+    }
+}
