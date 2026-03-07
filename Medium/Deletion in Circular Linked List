@@ -1,0 +1,51 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. make circular ll to singly ll
+2. delete the given key node
+3. again convert singly ll to circular ll
+
+*/
+
+
+
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+*/
+
+class Solution {
+    Node deleteNode(Node head, int key) {
+        //circular to singly ll
+        Node temp=head;
+        while(temp.next!=head) temp=temp.next;
+        temp.next=null;
+        
+        Node slow=head;
+        Node fast=head.next;
+        if(slow.data==key) head=head.next;
+        while(fast!=null){
+            if(fast.data==key){
+                slow.next=fast.next;
+                break;
+            }
+            slow=slow.next;
+            fast=fast.next;
+        }
+        
+        //singly to circular ll
+        temp=head;
+        while(temp.next!=null) temp=temp.next;
+        temp.next=head;
+        return head;
+    }
+}
