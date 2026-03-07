@@ -1,0 +1,42 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. make circular ll into singly ll
+2. reverse singly ll 
+3. again convert singly ll to circular ll
+
+*/
+
+
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+*/
+class Solution {
+    public Node reverseCircular(Node head) {
+        // code here
+        Node temp=head;
+        while(temp.next!=head) temp=temp.next;
+        temp.next=null;
+        Node curr=head;
+        Node prev=null;
+        Node fwd=null;
+        while(curr!=null){
+            fwd=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=fwd;
+        }
+        head.next=temp;
+        return prev;
+    }
+}
