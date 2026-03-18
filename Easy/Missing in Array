@@ -1,0 +1,26 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Total numbers should be from 1 to n (one missing).
+2. Calculate expected sum:
+              (n(n+1))/2
+​3. Calculate actual sum of array.
+4. Missing number = expected − actual
+
+*/
+
+
+
+class Solution {
+    int missingNum(int arr[]) {
+        // code here
+        long n = arr.length+1;
+        long sum=0;
+        for(int i=0; i<arr.length; i++){
+            sum+=arr[i];
+        }
+        return (int)((n*(n+1))/2 - sum);
+    }
+}
