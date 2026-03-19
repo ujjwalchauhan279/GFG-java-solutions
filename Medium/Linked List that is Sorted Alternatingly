@@ -1,0 +1,63 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Split list into two lists:
+  a → nodes at odd positions
+  b → nodes at even positions
+2. Reverse the even list (b).
+3. Attach reversed b at the end of a
+
+*/
+
+
+
+
+/*
+class Node {
+    int data;
+    Node next;
+
+    public Node (int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+*/
+
+class Solution {
+    public Node reverse(Node head){
+        Node curr=head;
+        Node prev=null;
+        Node fwd=null;
+        while(curr!=null){
+            fwd=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=fwd;
+        }
+        return prev;
+    }
+    public Node sort(Node head) {
+        Node a=new Node(-1);
+        Node b=new Node(-1);
+        Node t1=a;
+        Node t2=b;
+        Node temp=head;
+        while(temp!=null){
+            t1.next=temp;
+            t1=temp;
+            temp=temp.next;
+            
+            t2.next=temp;
+            t2=temp;
+            if(temp!=null) temp=temp.next;
+        }
+        t1.next=null;
+        b=b.next;
+        b=reverse(b);
+        t1.next=b;
+        return a.next;
+    }
+}
