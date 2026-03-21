@@ -1,0 +1,24 @@
+/* 
+
+Time Complexity: O(n) 
+Space Complexity: O(n) worst case
+Approach:
+1. Create a HashSet to store unique elements
+2. Traverse array and insert each element into set
+3. Set automatically removes duplicates
+4. Return size of set
+
+*/
+
+
+
+
+// User function Template for Java
+class Solution {
+    static int distinct(int arr[]) {
+        // code here
+        HashSet <Integer> set = new HashSet<>();
+        for(int i : arr) set.add(i);
+        return set.size();
+    }
+}
