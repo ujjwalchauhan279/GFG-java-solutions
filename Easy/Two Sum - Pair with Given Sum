@@ -1,0 +1,27 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Create a HashSet to store elements seen so far
+2. Traverse the array
+3. For each element, check if (target - current element) exists in the set
+4. If yes → pair found → return true
+5. Otherwise, add current element to the set
+6. If loop ends → return false
+
+*/
+
+
+
+class Solution {
+    boolean twoSum(int arr[], int target) {
+        // code here
+        HashSet<Integer> st = new HashSet<>();
+        for(int i=0; i<arr.length; i++){
+            if(st.contains(target-arr[i])) return true;
+            st.add(arr[i]);
+        }
+        return false;
+    }
+}
