@@ -1,0 +1,29 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Base case: if stack is empty → push x
+2. Otherwise:
+    Pop top element
+    Recursively call for remaining stack
+    Push the popped element back
+3. This ensures x reaches the bottom and order is preserved
+
+*/
+
+
+
+// User function Template for Java
+class Solution {
+    public Stack<Integer> insertAtBottom(Stack<Integer> st, int x) {
+        if(st.size()==0){
+            st.push(x);
+            return st;
+        }
+        int top = st.pop();
+        insertAtBottom(st, x);
+        st.push(top);
+        return st;
+    }
+}
