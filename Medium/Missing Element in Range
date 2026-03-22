@@ -1,0 +1,29 @@
+/* 
+
+Time Complexity: O(n+(high-low+1))
+Space Complexity: O(n)
+Approach:
+1. Create a HashSet to store elements of the array
+2. Traverse array and insert each element into the set
+3. Iterate from low to high
+4. For each number, check if it is not present in the set
+5. If not present → add it to the result list
+6. Return the list
+
+*/
+
+
+
+
+
+class Solution {
+    public ArrayList<Integer> missingRange(int[] arr, int low, int high) {
+        HashSet<Integer> set = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int x : arr) set.add(x);
+        for(int i=low; i<=high; i++){
+            if(!set.contains(i)) list.add(i);
+        }
+        return list;
+    }
+}
