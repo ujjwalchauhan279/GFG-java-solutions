@@ -1,0 +1,25 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Store last element of array in a variable
+2. Traverse array from second last index to 0
+3. Shift each element one position to the right
+4. Place stored last element at index 0
+
+*/
+
+
+
+
+
+class Solution {
+    public void rotate(int[] arr) {
+        int n = arr[arr.length-1];
+        for(int i=arr.length-2; i>=0; i--){
+            arr[i+1]=arr[i];
+        }
+        arr[0]=n;
+    }
+}
