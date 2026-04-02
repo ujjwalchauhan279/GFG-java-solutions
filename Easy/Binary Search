@@ -1,0 +1,38 @@
+/* 
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+Approach:
+1. Initialize low = 0, high = n-1, ans = -1
+2. While low <= high:
+3. Find mid = low + (high - low) / 2
+4. If arr[mid] == k:
+5. Store index in ans
+6. Move left → high = mid - 1 (to find first occurrence)
+7. If arr[mid] > k → move left (high = mid - 1)
+8. If arr[mid] < k → move right (low = mid + 1)
+9. Return ans
+
+*/
+
+
+
+
+
+class Solution {
+    public int binarysearch(int[] arr, int k) {
+        int low = 0;
+        int high = arr.length-1;
+        int ans=-1;
+        while(low<=high){
+            int mid = low +(high-low)/2;
+            if(arr[mid]==k){
+                ans=mid;
+                high = mid-1;
+            }
+            else if(arr[mid]>k) high=mid-1;
+            else low = mid+1;
+        }
+        return ans;
+    }
+}
