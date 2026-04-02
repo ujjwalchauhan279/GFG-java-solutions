@@ -1,0 +1,41 @@
+/* 
+
+Time Complexity: O(n+m)
+  let length of a = n
+  and length of b = m
+      O(n+m)
+Space Complexity: O(n)
+Approach:
+1. Create a HashMap to store frequency of elements in array a
+2. Traverse array a and update frequency in map
+3. Traverse array b
+4. For each element in b:
+5. If element not in map → return false
+6. Else decrease its frequency in map
+7. If frequency becomes 0 → remove from map
+8. If all elements of b are processed → return true
+
+*/
+
+
+
+
+class Solution {
+    public boolean isSubset(int a[], int b[]) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0; i<a.length;i++) {
+            if(map.containsKey(a[i])){
+                map.put(a[i], map.get(a[i])+1);
+            }
+            else map.put(a[i],1);
+        }
+        for(int x: b){
+            if(!map.containsKey(x)) return false;
+            else {
+                map.put(x, map.get(x)-1);
+                if(map.get(x)==0) map.remove(x);
+            }
+        }
+        return true;
+    }
+}
