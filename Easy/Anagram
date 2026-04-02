@@ -1,0 +1,39 @@
+/* 
+
+Time Complexity: O(n+m)
+    let length of s1 = m
+    and length of s2 = n
+    O(n+m)
+Space Complexity: O(m)
+Approach:
+1. Create a HashMap to store frequency of characters in s1
+2. Traverse s1 and update frequency in map
+3. Traverse s2
+4. For each character:
+5. If not present in map → return false
+6. Else decrease its frequency
+7. If frequency becomes 0 → remove from map
+8. After traversal, if all matched → return true
+
+*/
+
+
+
+
+class Solution {
+    public static boolean areAnagrams(String s1, String s2) {
+        HashMap <Character,Integer> map = new HashMap<>();
+        for(int i=0; i<s1.length(); i++) {
+            if(map.containsKey(s1.charAt(i))) map.put(s1.charAt(i) , map.get(s1.charAt(i))+1);
+            else map.put(s1.charAt(i), 1);
+        }
+        for(int i=0; i<s2.length(); i++){
+            if(!map.containsKey(s2.charAt(i))) return false;
+            else{
+                map.put(s2.charAt(i), map.get(s2.charAt(i))-1);
+                if(map.get(s2.charAt(i))==0) map.remove(s2.charAt(i));
+            }
+        }
+        return true;
+    }
+}
