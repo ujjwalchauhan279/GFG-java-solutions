@@ -1,0 +1,29 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Create a HashMap to store frequency of each element
+2. Traverse array and fill the map
+3. Initialize count = 0
+4. For each unique element in map:
+5. If (ele + k) exists → add freq(ele) * freq(ele + k) to count
+6. Return count
+
+*/
+
+
+
+
+
+class Solution {
+    int countPairs(int[] arr, int k) {
+        HashMap <Integer,Integer> map = new HashMap<>();
+        for(int ele: arr) map.put(ele , map.getOrDefault(ele,0)+1);
+        int count=0;
+        for(int ele: map.keySet()){
+            if(map.containsKey(ele+k)) count+=(map.get(ele))*(map.get(ele+k));
+        }
+        return count;
+    }
+}
