@@ -1,0 +1,84 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+Approach:
+1. Create a deep copy of the list (only next pointers)
+2. Insert copied nodes in between original nodes (interleave)
+3. For each original node, set random of copied node:
+4. copy.random = original.random.next
+5. Separate the two lists (restore original + extract copy)
+6. Return head of copied list
+
+*/
+
+
+
+
+
+
+
+/*
+class Node {
+    int data;
+    Node next;
+    Node random;
+
+    Node(int x) {
+        data = x;
+        next = null;
+        random = null;
+    }
+}
+*/
+class Solution {
+    public Node cloneLinkedList(Node head1) {
+        //copy linklist
+        Node temp1 = head1;
+        Node head2 = new Node(-1);
+        Node temp2 = head2;
+        while(temp1!=null){
+            Node a = new Node(temp1.data);
+            temp2.next = a;
+            temp2 = temp2.next;
+            temp1 = temp1.next;
+        }
+        head2=head2.next;
+        
+        //alternatively connect both linklist
+        temp1 = head1;
+        temp2 = head2;
+        Node t = null;
+        while(temp1!=null){
+            t = temp1.next;
+            temp1.next = temp2;
+            temp2 = temp2.next;
+            temp1.next.next = t;
+            temp1=t;
+        }
+        
+        //attach random
+        temp1 = head1;
+        while(temp1!=null){
+            if(temp1.random==null) temp1.next.random = null;
+            else temp1.next.random = temp1.random.next;
+            temp1 = temp1.next.next;
+        }
+        
+        //deattach both list
+        temp1 = head1;
+        temp2 = head2;
+        while(temp1!=null){
+            temp1.next = temp1.next.next;
+            temp1 = temp2.next;
+            
+            if(temp1!=null) temp2.next = temp1.next;
+            temp2 = temp2.next;
+        }
+        return head2;
+    }
+}
+
+
+
+
