@@ -1,0 +1,39 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Approach:
+1. Initialize two pointers l = 0, r = 0
+2. Use a HashMap to store last index of characters
+3. Traverse string using r
+4. If character exists in map and index ≥ l:
+5. Move l to lastIndex + 1
+6. Update current character index in map
+7. Update maxlen = max(maxlen, r - l + 1)
+8. Move r++
+9. Return maxlen
+
+
+*/
+
+
+
+
+class Solution {
+    int longestUniqueSubstring(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        int l=0;
+        int r=0;
+        int maxlen=0;
+        while(r<s.length()){
+            if(map.containsKey(s.charAt(r)) && map.get(s.charAt(r))>=l){
+                l=map.get(s.charAt(r))+1;
+            }
+            map.put(s.charAt(r), r);
+            maxlen = (int)Math.max(maxlen, r-l+1);
+            r++;
+        }
+        return maxlen;
+    }
+}
