@@ -1,0 +1,70 @@
+/* 
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+Approach:
+1. Create a deep copy of the linked list (only next pointers)
+2. Create a HashMap to map original nodes → copied nodes
+3. Store mapping for each node (original → copy)
+4. Also map null → null to handle edge case
+5. Traverse original list again
+6. Set random pointer of copied node using map:
+7. copy.random = map.get(original.random)
+8. Return head of copied list
+
+*/
+
+
+
+
+
+
+/*
+class Node {
+    int data;
+    Node next;
+    Node random;
+
+    Node(int x) {
+        data = x;
+        next = null;
+        random = null;
+    }
+}
+*/
+class Solution {
+    public Node cloneLinkedList(Node head1) {
+        //copy linklist
+        Node temp1 = head1;
+        Node head2 = new Node(-1);
+        Node temp2 = head2;
+        while(temp1!=null){
+            Node a = new Node(temp1.data);
+            temp2.next = a;
+            temp2 = temp2.next;
+            temp1 = temp1.next;
+        }
+        head2=head2.next;
+        
+        HashMap<Node,Node> map = new HashMap<>();
+        temp1 = head1;
+        temp2 = head2;
+        map.put(null,null);
+        while(temp1!=null){
+            map.put(temp1,temp2);
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+        
+        temp1 = head1;
+        while(temp1!=null){
+            map.get(temp1).random = map.get(temp1.random);
+            temp1 = temp1.next;
+        }
+        return head2;
+    }
+}
+
+
+
+
