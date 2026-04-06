@@ -1,0 +1,33 @@
+Time Complexity:
+
+Let n = size of array
+
+    Single traversal of array → O(n)
+
+Overall: O(n)
+
+
+Space Complexity: O(1)
+
+
+Approach:
+
+1. Traverse the array from index 0 to n-2
+2. Compare current element with next element
+3. If arr[i+1] < arr[i], array is not sorted → return false
+4. If no such violation is found, array is sorted
+5. Return true
+
+
+
+
+
+class Solution {
+    public boolean isSorted(int[] arr) {
+        // code here
+        for(int i=0; i<arr.length-1; i++){
+            if(arr[i+1]<arr[i]) return false;
+        }
+        return true;
+    }
+}
