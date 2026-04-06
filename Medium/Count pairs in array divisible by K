@@ -1,0 +1,65 @@
+Time Complexity:
+
+Let n = size of array
+
+    Building remainder map → O(n)
+    Traversing map → O(k)
+
+Overall: O(n)
+
+
+Space Complexity: O(k)
+
+
+Approach:
+
+1. Create a HashMap to store frequency of (element % k)
+2. Traverse array and fill map with remainder frequencies
+3. Handle remainder = 0:
+   - Pairs = freq * (freq - 1) / 2
+4. If k is even, handle remainder = k/2:
+   - Pairs = freq * (freq - 1) / 2
+5. For remaining remainders:
+   - For each rem, check if (k - rem) exists
+   - Add pairs = freq[rem] * freq[k - rem]
+6. Avoid double counting of pairs
+7. Return total pairs
+
+
+
+
+
+
+
+class Solution {
+    public static long countKdivPairs(int arr[], int n, int k) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        long pairs=0;
+        for(int ele: arr) map.put(ele%k , map.getOrDefault(ele%k,0)+1);
+        
+        //if map contains 0 (multiple of 4)
+        if(map.containsKey(0)){
+            long freq = map.get(0);
+            pairs+=(freq*(freq-1))/2;
+            map.remove(0);
+        }
+        
+        //if K is even and contains k/2
+        if(k%2==0){
+            if(map.containsKey(k/2)){
+                long freq = map.get(k/2);
+                pairs+=(freq*(freq-1))/2;
+                map.remove(k/2);
+            }
+        }
+        pairs*=2;
+        
+        //other numbers
+        for(int ele: map.keySet()){
+            if(map.containsKey(k-ele)){
+                pairs+=map.get(ele)*map.get(k-ele);
+            }
+        }
+        return pairs/2;
+    }
+}
