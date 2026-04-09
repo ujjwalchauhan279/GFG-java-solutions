@@ -1,0 +1,55 @@
+Time Complexity:
+
+Let n = length of string
+
+    Single traversal → O(n)
+    Building result → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores characters → O(n)
+    StringBuilder → O(n)
+
+Overall: O(n)
+
+
+Approach:
+
+1. Create a stack to store characters
+
+2. Push first character into stack
+
+3. Traverse the string:
+   - If current character is different from top of stack:
+     → push it into stack
+   - Else:
+     → skip (ignore consecutive duplicate)
+
+4. After traversal:
+   - Pop all elements from stack and add to StringBuilder
+
+5. Reverse the result (since stack is LIFO)
+
+6. Return final string
+
+
+
+
+
+class Solution {
+    public String removeConsecutiveCharacter(String s) {
+        Stack<Character> st = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        st.push(s.charAt(0));
+        for(int i=0; i<s.length(); i++){
+            if(st.peek()!=s.charAt(i)) st.push(s.charAt(i));
+        }
+        while(st.size()!=0){
+            sb.append(st.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
