@@ -1,0 +1,43 @@
+Time Complexity:
+
+Let n be the input
+
+    Each call makes 2 recursive calls:
+    T(n) = T(n-1) + T(n-2)
+
+Overall: O(2^n)
+
+
+Space Complexity:
+
+    Recursion stack depth = n
+
+Overall: O(n)
+
+
+Approach:
+
+1. Handle base cases:
+   - If n == 0 → return 0
+   - If n == 1 → return 1
+
+2. For other cases:
+   - Recursively compute:
+     → fib(n-1)
+     → fib(n-2)
+
+3. Return sum of both results
+
+4. This builds recursion tree and computes answer
+
+
+
+
+
+
+class Solution {
+    public int nthFibonacci(int n) {
+       if(n==0 || n==1) return n;
+       return nthFibonacci(n-1) + nthFibonacci(n-2);
+    }
+}
