@@ -1,0 +1,61 @@
+Time Complexity:
+
+Let n = size of array
+
+    Each element is pushed once and popped once → O(n)
+
+Overall: O(n)
+
+
+Space Complexity:
+
+    Stack stores elements → O(n)
+    Result list → O(n)
+
+Overall: O(n) 
+
+
+Approach:
+
+1. Create a stack to maintain decreasing order (monotonic stack)
+
+2. Traverse array from right to left:
+
+   - While stack is not empty and top <= current element:
+     → pop elements (they cannot be next greater)
+
+3. After popping:
+   - If stack is empty → no greater element → add -1
+   - Else → top of stack is next greater element
+
+4. Push current element into stack
+
+5. Reverse the result list (since traversal was from right to left)
+
+6. Return the final list
+
+
+
+
+
+
+import java.util.Collections;
+
+class Solution {
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        for(int i=arr.length-1; i>=0; i--){
+            while(st.size()>0 && st.peek()<=arr[i]) st.pop();
+            
+            if(st.size()==0) list.add(-1);
+            else list.add(st.peek());
+            
+            st.push(arr[i]);
+        } 
+        
+        Collections.reverse(list);
+        
+        return list;
+    }
+}
